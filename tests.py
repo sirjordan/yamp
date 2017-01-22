@@ -55,6 +55,10 @@ class YampDiceTests(unittest.TestCase):
         self.assertEqual(dices.score_straight([6, 5, 4, 3, 1], 4), 30)
         self.assertEqual(dices.score_straight([6, 2, 3, 4, 5], 5), 40)
 
+    def test_score_straight_throw_ex(self):
+        args = ([1, 3, 6, 6, 6], 3)
+        self.assertRaises(ValueError, dices.score_straight, *args)
+
 if __name__ == '__main__':
     unittest.main()
 

@@ -87,6 +87,9 @@ def score_straight(dices, sequence_count):
     :param sequence_count: 4 or 5 sequence
     :return: 30 if 4 sequential or 40 if 5 sequential
     """
+    if sequence_count != 4 and sequence_count != 5:
+        raise ValueError('Parameter "n" must be 4 or 5 to count score')
+
     dices.sort()
     dice = dices[0]
     sequence = 1
@@ -106,8 +109,6 @@ def score_straight(dices, sequence_count):
             return 30
         elif sequence_count == 5:
             return 40
-        else:
-            raise ValueError('Parameter "n" must be 4 or 5 to count score')
     else:
         return 0
 
