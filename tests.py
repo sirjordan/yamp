@@ -37,6 +37,24 @@ class YampDiceTests(unittest.TestCase):
         self.assertEqual(dices.score_full([1, 2, 3, 4, 5]), 0)
         self.assertEqual(dices.score_full([2, 3, 3, 3, 2]), 25)
 
+    def test_score_chance(self):
+        self.assertEqual(dices.score_chance([1, 1, 3, 3, 5]), 13)
+
+    def test_score_yamp(self):
+        self.assertEqual(dices.score_yamp([1, 1, 1, 1, 1]), 50)
+        self.assertEqual(dices.score_yamp([1, 2, 1, 1, 1]), 0)
+
+    def test_score_straight(self):
+        self.assertEqual(dices.score_straight([1, 2, 3, 4, 6], 4), 30)
+        self.assertEqual(dices.score_straight([2, 3, 4, 5, 6], 4), 30)
+        self.assertEqual(dices.score_straight([1, 2, 3, 4, 5], 5), 40)
+        self.assertEqual(dices.score_straight([2, 3, 4, 5, 6], 5), 40)
+        self.assertEqual(dices.score_straight([1, 2, 3, 2, 2], 5), 0)
+        self.assertEqual(dices.score_straight([2, 3, 2, 5, 3], 5), 0)
+        self.assertEqual(dices.score_straight([1, 3, 4, 5, 6], 4), 30)
+        self.assertEqual(dices.score_straight([6, 5, 4, 3, 1], 4), 30)
+        self.assertEqual(dices.score_straight([6, 2, 3, 4, 5], 5), 40)
+
 if __name__ == '__main__':
     unittest.main()
 

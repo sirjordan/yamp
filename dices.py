@@ -40,6 +40,7 @@ def score_matching(dices, num_to_match):
 def score_n_of_a_kind(dices, n):
     """
     At least three/four (n) dice the same
+    :param n: 3 or 4
     :return: Sum of all dice
     """
     if n != 3 and n != 4:
@@ -79,6 +80,56 @@ def score_full(dices):
         return 0
 
 
+def score_straight(dices, sequence_count):
+    """
+    Four/Five sequential dice
+    (1-2-3-4, 2-3-4-5, or 3-4-5-6) if 3 or (1-2-3-4-5 or 2-3-4-5-6) if 5 sequential
+    :param sequence_count: 4 or 5 sequence
+    :return: 30 if 4 sequential or 40 if 5 sequential
+    """
+    dices.sort()
+    dice = dices[0]
+    sequence = 1
+    for seq in range(1, len(dices)):
+        if dices[seq] == dice + 1:  # Next is +1 grater
+            sequence += 1
+        else:
+            sequence = 1
+
+        if sequence == sequence_count:
+            break
+
+        dice = dices[seq]
+
+    if sequence == sequence_count:
+        if sequence_count == 4:
+            return 30
+        elif sequence_count == 5:
+            return 40
+        else:
+            raise ValueError('Parameter "n" must be 4 or 5 to count score')
+    else:
+        return 0
+
+
+def score_yamp(dices):
+    """
+    All five dice the same
+    :return: 50
+    """
+    for dice_num in range(MIN_DICE, MAX_DICE + 1):
+        if count_equal(dices, dice_num) == DICE_COUNT:
+            return 50
+
+    return 0
+
+
+def score_chance(dices):
+    """
+    Any combination
+    :return: Sum of all dice
+    """
+    return sum(dices)
 
 
 
